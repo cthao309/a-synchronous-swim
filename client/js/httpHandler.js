@@ -1,10 +1,32 @@
 (function() {
 
+  console.log('httpHandler client invoked');
+
   const serverUrl = 'http://127.0.0.1:3000';
 
   //
   // TODO: build the swim command fetcher here
   //
+
+  const fetchSwimCommand = {
+    fetchRandomCommand: (fetchSwimCommand) => {
+      debugger
+      $.ajax({
+        type: 'GET',
+        url: serverUrl + '/random',
+        success: (res) => {
+          console.log(res)
+          SwimTeam.move(res)
+        }
+      })
+    }
+  }
+
+  // event listener for UI on random move
+  $('button.getRandom').on('click', function() {
+    console.log('calling fetchRandomCommand')
+    fetchRandomCommand.fetchRandomCommand('random');
+  })
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
