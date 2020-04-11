@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const headers = require('./cors');
 const multipart = require('./multipartUtils');
+const queueMessage = require('./messageQueue');
 
 // Path for the background image ///////////////////////
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
@@ -12,34 +13,34 @@ module.exports.initialize = (queue) => {
   messageQueue = queue;
 };
 
-// function to randomly generate a "get" option
-const randomGetGenerator = function() {
-  const getOption = ['up', 'down', 'left', 'right'];
-
-  // return the random option
-  let result = getOption[Math.floor([Math.random() * getOption.length])];
-
-  return result;
+let directions = ['up', 'down', 'left', 'right'];//-------mw
+let random = function () {//-------mw
+  let idx = Math.floor(Math.random() * directions.length)//-------mw
+  return directions[idx]//-------mw
 }
+
 
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
-
-  // if the method is an OPTION and the end-point if root
   if(req.method === 'OPTIONS' && req.url === '/') {
-
-    console.log('OPTIONS request end point hit')
+    // console.log('end point is test: ')
     res.writeHead(200, headers);
     res.end();
   }
 
-  // if GET request for random generated option and end-point is root
   if(req.method === 'GET' && req.url === '/') {
-
     res.writeHead(200, headers);
-    console.log('GET request end point hit (message) => ', messageQueue )
-    res.end(messageQueue);
+    console.log('messageQueue => ', messageQueue)
+    console.log('success => ' , queueMessage.dequeue())
+    res.end(queueMessage.dequeue());
+
+  }
+
+  if(req.method === 'GET' && req.url === '/random') {
+    // console.log('end point random')
+    res.writeHead(200, headers);
+    res.end(random());
   }
 
 

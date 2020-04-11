@@ -7,20 +7,19 @@
   //
   // TODO: build the swim command fetcher here
   //
-
-  function fetchRandomCommand(fetchSwimCommand) {
-    console.log('making ajax call... ')
+  const ajaxGet = () => {
     $.ajax({
       type: 'GET',
       url: serverUrl,
       success: (direction) => {
-        console.log(direction)
-        SwimTeam.move(direction)
-      }
-    })
-  }
+        console.log('direction from server => ', direction)
+        SwimTeam.move(direction);
+      },
+      error: error => {console.log(error)}
+    });
+  };
 
-  setInterval(fetchRandomCommand(), 2000)
+  setInterval(ajaxGet, 5000);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

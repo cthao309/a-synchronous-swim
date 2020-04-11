@@ -24,16 +24,15 @@ describe('server responses', () => {
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
     let {req, res} = server.mock('/', 'GET');
-
     httpHandler.router(req, res);
 
-    let possibleOption = ['up', 'down', 'left', 'right'];
-    let isValid = possibleOption.indexOf(res._data.toString()) >= 0;
+    let directions = ['up', 'down', 'left', 'right'];
+    let responseCommand = res._data.toString();
+    let isValidCommand = directions.indexOf(responseCommand) >= 0;
 
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
-    expect(isValid).to.equal(true);
-
+    expect(isValidCommand).to.equal(true);
     done();
   });
 
