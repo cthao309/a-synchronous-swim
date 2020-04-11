@@ -21,29 +21,25 @@ const randomGetGenerator = function() {
   return Math.floor(getOption[Math.random() * getOption.length])
 }
 
-
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
-  switch(req.method) {
-    case 'OPTIONS':
-      res.writeHead(200, headers);
-      res.end();
-      break;
+  // if the method is an OPTION and the end-point if root
+  if(req.method === 'OPTIONS' && req.url === '/') {
 
-    case 'GET':
-      if(req.url === '/random') {
-        res.writeHead(200, headers);
-        res.send('I received your command => ', req.url)
-        res.end(randomGetGenerator());
-      }
-      break;
-
-    default:
-      break;
-
-
+    console.log()
+    res.writeHead(200, headers);
+    res.end();
   }
+
+  // if GET request for random generated option and end-point is root
+  if(req.method === 'GET' && req.url === '/') {
+
+    console.log('random generated => ', randomGetGenerator())
+
+     res.writeHead(200, headers);
+     res.end(randomGetGenerator());
+   }
 
   next(); // invoke next() at the end of a request to help with testing!
 };

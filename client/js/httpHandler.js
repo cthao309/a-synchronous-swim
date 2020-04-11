@@ -13,7 +13,7 @@
       debugger
       $.ajax({
         type: 'GET',
-        url: serverUrl + '/random',
+        url: serverUrl,
         success: (res) => {
           console.log(res)
           SwimTeam.move(res)
