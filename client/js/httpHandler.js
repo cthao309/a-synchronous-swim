@@ -8,25 +8,19 @@
   // TODO: build the swim command fetcher here
   //
 
-  const fetchSwimCommand = {
-    fetchRandomCommand: (fetchSwimCommand) => {
-      debugger
-      $.ajax({
-        type: 'GET',
-        url: serverUrl,
-        success: (res) => {
-          console.log(res)
-          SwimTeam.move(res)
-        }
-      })
-    }
+  function fetchRandomCommand(fetchSwimCommand) {
+    console.log('making ajax call... ')
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (direction) => {
+        console.log(direction)
+        SwimTeam.move(direction)
+      }
+    })
   }
 
-  // event listener for UI on random move
-  $('button.getRandom').on('click', function() {
-    console.log('calling fetchRandomCommand')
-    fetchRandomCommand.fetchRandomCommand('random');
-  })
+  setInterval(fetchRandomCommand(), 2000)
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -39,7 +33,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
