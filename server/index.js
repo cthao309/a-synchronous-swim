@@ -7,9 +7,12 @@ const messageQueue = require('./js/messageQueue');
 const httpHandler = require('./js/httpHandler');
 
 // keypressHandler.initialize(message => console.log(`Messag e received: ${message}`));
-keypressHandler.initialize(message =>  {
-  messageQueue.enqueue(message);
-});
+// keypressHandler.initialize(message =>  {
+//   messageQueue.enqueue(message);
+keypressHandler.initialize(messageQueue.enqueue);
+
+  // httpHandler.initialize(messageQueue);
+// });
 
 const http = require('http');
 const server = http.createServer(httpHandler.router);
