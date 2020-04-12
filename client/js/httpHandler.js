@@ -22,16 +22,6 @@
     });
   };
 
-<<<<<<< HEAD
-  setInterval(ajaxGet, 5000);
-
-||||||| merged common ancestors
-  setInterval(ajaxGet, 5000);
-
-
-
-
-=======
   ajaxGet();
 
 
@@ -48,7 +38,6 @@ const fetchImage = () => {
 }
 
 fetchImage();
->>>>>>> 6261ba5e7d78d78e1b9718786030a13672aa01c2
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.
@@ -60,13 +49,7 @@ fetchImage();
     $.ajax({
       type: 'POST',
       data: formData,
-<<<<<<< HEAD
-      url: serverUrl,
-||||||| merged common ancestors
-      url: 'http://127.0.0.1:8080/',
-=======
       url: serverUrl + '/background.jpg',
->>>>>>> 6261ba5e7d78d78e1b9718786030a13672aa01c2
       cache: false,
       contentType: false,
       processData: false,
